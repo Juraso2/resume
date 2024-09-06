@@ -5,6 +5,13 @@ export const Users: CollectionConfig = {
     admin: {
         useAsTitle: 'email',
     },
+    access: {
+        delete: ({ req: { user }, id }) => {
+            if (!user) return false
+
+            return Number(id) !== user.id
+        },
+    },
     auth: true,
     fields: [
         // Email added by default
